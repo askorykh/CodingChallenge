@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+        #heading{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="heading">Coding Challenge</h1>
+    <h1>Get data for a machine</h1>
+    <h5>Enter sourceId of the machine to get all details about the machine</h5>
+    <form action="/getdata/" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="number" name="sourceId" placeholder="sourceId" id="inputsourceId">
+        <button type="submit" >Click me!</button>  
+    </form>
+    <h1>Create a new machine</h1>
+    <h5>Enter all the machine details</h5>
+    <form action="/addmachine/" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="owner" placeholder="owner" id="inputowner">
+        <input type="text" name="available" placeholder="available" id="inputavailable">
+        <input type="text" name="country" placeholder="country" id="inputcountry">
+        <input type="text" name="currency" placeholder="currency" id="inputcurrency">
+        <input type="text" name="machineInfo" placeholder="machineInfo" id="machineInfo">
+        <input type="text" name="machineType" placeholder="machineType" id="machineType">
+        <input type="text" name="photos" placeholder="photos" id="inputphotos">
+        <input type="number" name="sourceId" placeholder="sourceId" id="inputsourceId">
+        <input type="number" name="price" placeholder="price" id="inputprice">
+        <input type="text" name="source" placeholder="source" id="inputsource">
+        <input type="text" name="url" placeholder="url" id="inputurl">
+        <button type="submit" >Click me!</button>    
+    </form>
+    <h1>Update machine data</h1>
+    <h5>Enter sourceID and new owner name to update</h5>
+    <form action="/updatmachine/" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="number" name="sourceId" placeholder="sourceId" id="inputsourceId">
+        <input type="text" name="owner" placeholder="owner" id="inputowner">
+        <button type="submit" >Click me!</button>  
+    </form>
+    <h1>Get the number of machines for each model</h1>
+    <h5>Enter year of the machine to get number of machine available in that model</h5>
+    <form action="/noofmachines/" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="number" name="noofmachines" placeholder="Year of the machine" id="noofmachines">
+        <button type="submit" >Click me!</button>  
+    </form>
+    <h1>Get all machines belonging to a certain owner</h1>
+    <h5>Enter owner name to get all machine details of that owner</h5>
+    <form action="/ownermachine/" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="owner" placeholder="owner" id="inputowner">
+        <button type="submit" >Click me!</button>  
+    </form>
+    <h1>Get the list of models with a certain attribute, i.e.: all machine with Round bales</h1>
+    <h5>Enter machine attribute to get the list of models available</h5>
+    <form action="/listofmodel/" method="POST" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="attribute" placeholder="Enter the attribute" id="attribute">
+        <button type="submit" >Click me!</button>  
+    </form>
+</body>
+</html>
