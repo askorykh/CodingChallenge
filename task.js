@@ -28,7 +28,7 @@ app.get('/', function(req, res) {
 
 //Get data for a machine
 /**  I would advice to check this https://opensource.zalando.com/restful-api-guidelines/#http-requests,
- * because in the code she uses post for every request, but better if:
+ * because in the code post is used for every request, but better if:
  * for select queries -> app.get()  ---  GET HTTP method
  * for insert queries -> app.post()  --- POST HTTP method
  * for update queries -> app.put() --- PUT HTTP method
