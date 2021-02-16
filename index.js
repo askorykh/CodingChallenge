@@ -14,8 +14,9 @@ let csvStream = fastcsv
     csvData.shift();
    
     // create a new connection to the database
+    //Hard coded credentials better to use .env
     const connection = mysql.createConnection({
-        host: "localhost",
+        host: "localhost", 
         user: "root",
         password: "12345678",
         database: "customers"
