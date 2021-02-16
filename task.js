@@ -27,6 +27,19 @@ app.get('/', function(req, res) {
 })
 
 //Get data for a machine
+/**  I would advice to check this https://opensource.zalando.com/restful-api-guidelines/#http-requests,
+ * because in the code she uses post for every request, but better if:
+ * for select queries -> app.get()  ---  GET HTTP method
+ * for insert queries -> app.post()  --- POST HTTP method
+ * for update queries -> app.put() --- PUT HTTP method
+ * for delete queries(you do not have it) -> app.delete() --- DELETE HTTP method
+ * https://expressjs.com/en/starter/basic-routing.html
+ *
+ *
+ */
+
+//Get should be used ->  app.get(...)
+//Following naming convention for routes -> better name can be '/machines
 app.post('/getdata', function(req, res) {
     let query = "SELECT * FROM machine_details WHERE `sourceId` = ? "
     connection.query(query, [req.body.sourceId], function(err, result) {
@@ -40,7 +53,7 @@ app.post('/getdata', function(req, res) {
 });
 
 //Create a new machine
-
+//Following naming convention for routes -> better name can be '/machine'
 app.post('/addmachine', function(req, res) {
     console.log(req.body.owner);
     const owner = req.body.owner;
@@ -72,6 +85,9 @@ app.post('/addmachine', function(req, res) {
 })
 
 //Update machine data
+// Put should used to update object -> app.put(..)
+//Following naming convention for routes -> better name can be '/machine'
+//Since different HTTP method used, we can have the same name
 app.post('/updatmachine', function(req, res) {
     let query = "update machine_details set owner = ? where sourceId = ?  ";
     connection.query(query,[req.body.owner, req.body.sourceId], function(err, result) {
@@ -87,6 +103,14 @@ app.post('/updatmachine', function(req, res) {
     })
 });
 //Get the number of machines for each model
+//Get should be used ->  app.get(...)
+//Following naming convention for routes -> better name can be '/machine/models/total
+//Here we want to get all machines count by model, so we do not need to send parameters
+//SQL should be something like:
+/**
+ *  Select machineType, count(*) from machine_details GROUP BY machineType;
+ *
+ */
 app.post('/noofmachines', function(req, res) {
     console.log(req.body.noofmachines);
     let query = "SELECT COUNT(*) FROM machine_details WHERE machineInfo like '% "+ req.body.noofmachines + "%'";
@@ -102,6 +126,9 @@ app.post('/noofmachines', function(req, res) {
 });
 
 //Get all machines belonging to a certain owner
+//Get should be used ->  app.get(...)
+//Following naming convention for routes -> better name can be '/owner/:ownerId/machines/
+// you can get this parameter req.params.ownerId
 app.post('/ownermachine', function(req, res) {
     let query = "SELECT machineType FROM machine_details WHERE owner= ? ";
     connection.query(query, [req.body.owner], function(err, result) {
@@ -115,6 +142,8 @@ app.post('/ownermachine', function(req, res) {
 });
 
 //Get the list of models with a certain attribute, i.e.: all machine with Round bales
+//Here post can be used since we can send more attributes to search, for one attribute Get can be used
+//Following naming convention for routes -> better name can be '/machines/search
 app.post('/listofmodel', function(req, res) {
     console.log(req.body.attribute);
     let query = "SELECT machineInfo FROM machine_details WHERE machineInfo like '% "+ req.body.attribute + "%'"
@@ -131,3 +160,5 @@ app.post('/listofmodel', function(req, res) {
 app.listen(port, function() {
     console.log(`listening on ${port}`)
 });
+
+//Do not forget to change Frontend UI if backend methods are changed :)
